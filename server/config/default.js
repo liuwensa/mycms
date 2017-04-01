@@ -4,9 +4,6 @@
 
 'use strict';
 
-const siteInfo = require('../enum/siteInfo');
-const sysMsg   = require('../enum/sysMsg');
-
 module.exports = {
   // debug 为 true 时，用于本地调试
   debug         : false,
@@ -38,8 +35,6 @@ module.exports = {
     needConsole   : true,
     replaceConsole: true
   },
-  siteInfo      : siteInfo,
-  sysMsg        : sysMsg,
 
   // 邮件相关设置
   site_email                  : 'xx@163.com',

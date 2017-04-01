@@ -17,11 +17,11 @@ const ContentTagsSchema = new Schema({
     'default': shortid.generate
   },
   name    : String,
-  alias   : {type: Date, comment: '别名'},
+  alias   : {type: String, comment: '别名'},
   date    : {type: Date, default: Date.now},
   comments: String
 });
 
-const ContentTags = mongoose.model("ContentTags", ContentTagsSchema);
+const ContentTags = mongoose.model('ContentTags', ContentTagsSchema);
 
 module.exports = ContentTags;

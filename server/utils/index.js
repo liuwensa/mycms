@@ -36,14 +36,37 @@ module.exports = {
   validator: validator,
   _        : lodash,
 
-  myuuid: function () {
+  myuuid   : function () {
     return uuid().replace(/-/g, '');
   },
-  md5   : function (content) {
+  md5      : function (content) {
     const buf = new Buffer(content);
     content   = buf.toString('binary');
     const md5 = cryptos.createHash('md5');
     md5.update(content);
     return md5.digest('hex');
+  },
+  // 根据父子生成数组树结构
+  transData: function (data, id = 'id', pid = 'parentID', children = 'children') {
+    const resluts = [];
+    const hash    = {};
+
+    for (let i = 0, len = data.length; i < len; i++) {
+      hash[data[i][id]] = data[i];
+    }
+
+
+    for (let i = 0, len = data.length; i < len; i++) {
+      const aVal   = data[i];
+      const hashVP = hash[aVal[pid]];
+      if (hashVP) {
+        !hashVP[children] && (hashVP[children] = []);
+        hashVP[children].push(aVal);
+      } else {
+        resluts.push(aVal);
+      }
+    }
+
+    return resluts;
   }
 };

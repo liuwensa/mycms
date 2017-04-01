@@ -8,24 +8,21 @@
 const mongoose = require('mongoose');
 const shortid  = require('shortid');
 
-const TemplateItems = require('./TemplateItems');
-
 const Schema = mongoose.Schema;
 
 const ContentCategorySchema = new Schema({
   _id        : {
-    type     : String,
-    unique   : true,
-    'default': shortid.generate
+    type   : String,
+    unique : true,
+    default: shortid.generate
   },
   uid        : {type: Number, default: 0},
   name       : String,
   keywords   : String,
   sortId     : {type: Number, default: 1, comment: '排序 正整数'},
   parentID   : {type: String, default: '0'},
-  state      : {type: String, default: '1', comment: '是否公开 默认公开'},
+  state      : {type: String, default: '0', comment: '是否公开'},
   date       : {type: Date, default: Date.now},
-  contentTemp: {type: String, ref: 'TemplateItems', comment: '内容模板'},
   defaultUrl : {type: String, default: '', comment: '父类别的默认目录'},
   homePage   : {type: String, default: 'ui', comment: '必须唯一'},
   sortPath   : {type: String, default: '0', comment: '存储所有父节点结构'},

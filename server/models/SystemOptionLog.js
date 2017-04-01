@@ -10,7 +10,6 @@ const shortid  = require('shortid');
 
 const Schema = mongoose.Schema;
 
-const adminFunc = require('./db/adminFunc');
 
 const SystemOptionLogSchema = new Schema({
   _id : {

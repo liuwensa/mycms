@@ -19,7 +19,8 @@ module.exports = {
  * @returns {*}
  */
 function getAdminUsers(options) {
-  return db.AdminUser.find(options).sort({'date': -1})
+  return db.AdminUser.find(options)
+    .sort({'date': -1})
     .populate('group');
 }
 

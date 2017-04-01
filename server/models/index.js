@@ -28,7 +28,7 @@ mongoose.set('debug', (collectionName, methodName, arg1, arg2, arg3) => {
 fs
   .readdirSync(__dirname)
   .filter(function (file) {
-    return (file.indexOf('.') !== 0) && (file !== 'index.js') && (file !== 'db');
+    return (file.indexOf('.') !== -1) && (file !== 'index.js') && (file !== 'db');
   })
   .forEach(function (file) {
     const modelName = file.replace('.js', '');

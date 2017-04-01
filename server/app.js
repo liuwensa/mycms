@@ -18,16 +18,11 @@ const partials     = require('express-partials');
 const ueditor      = require('ueditor-nodejs');
 const ejs          = require('ejs');
 
-const adminUser = require('./routes/adminUser');
-const routes    = require('./routes/index');
-const users     = require('./routes/users')(io);
-const admin     = require('./routes/admin');
+const tags      = require('./routes/tags');
+const category  = require('./routes/category');
 const content   = require('./routes/content');
-const adminCtrl = require('./routes/adminCtrl');
-const system    = require('./routes/system');
-const siteFunc  = require('./models/db/siteFunc');
-const filter    = require('./util/filter');
-
+const adminUser = require('./routes/adminUser');
+const admin     = require('./routes/admin');
 
 /*实例化express对象*/
 var app = express();
@@ -75,39 +70,20 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use(filter.authUser);
 
-app.use(function (req, res, next) {
-  // 针对注册会员
-  res.locals.logined       = req.session.logined;
-  res.locals.userInfo      = req.session.user;
-  // 针对管理员
-  res.locals.adminlogined  = req.session.adminlogined;
-  res.locals.adminUserInfo = req.session.adminUserInfo;
-  res.locals.adminNotices  = req.session.adminNotices;
-  // 指定站点域名
-  res.locals.myDomain      = req.headers.host;
-  next();
-});
+// app.use(function (req, res, next) {
+//   // 针对注册会员
+//   res.locals.logined       = req.session.logined;
+//   res.locals.userInfo      = req.session.user;
+//   // 针对管理员
+//   res.locals.adminlogined  = req.session.adminlogined;
+//   res.locals.adminUserInfo = req.session.adminUserInfo;
+//   res.locals.adminNotices  = req.session.adminNotices;
+//   // 指定站点域名
+//   res.locals.myDomain      = req.headers.host;
+//   next();
+// });
 
-
-// 配置站点地图和robots抓取
-app.get('/sitemap.xml', function (req, res, next) {
-  siteFunc.setDataForSiteMap(req, res);
-});
-
-app.get('/robots.txt', function (req, res, next) {
-  var stream = fs.createReadStream('./robots.txt', {flags: 'r'});
-  stream.pipe(res);
-});
-
-//事件监听
-io.on('connection', function (socket) {
-//    socket.emit('news', { hello: 'world' });
-//    socket.on('my other event', function (data) {
-//        console.log(data);
-//    });
-});
 
 //数据格式化
 app.locals.myDateFormat = function (date) {
@@ -129,32 +105,23 @@ app.locals.searchKeyWord = function (content, key) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*指定路由控制*/
-app.use('/', routes);
 app.use('/adminuser', adminUser);
-app.use('/content', content);
-app.use('/users', users);
-app.use('/admin', adminCtrl);
+app.use('/adminapi', tags);
+app.use('/adminapi', category);
+app.use('/adminapi', content);
 app.use('/admin', admin);
-app.use('/system', system);
 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err    = new Error('Not Found');
   err.status = 404;
-  // console.log(err);
-  siteFunc.renderToTargetPageByType(req, res, 'error', {
-    info   : '找不到页面',
-    message: config.systemIllegalParam,
-    page   : 'do404'
-  });
+  return res.json({code: 404, msg: err.message});
 });
 
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
-  return res.json({code: 500, msg: err});
-  // siteFunc.renderToTargetPageByType(req, res, 'error', {info: '出错啦！', message: err.message, page: 'do500'});
+  return res.json({code: 500, msg: err.message});
 });
 
 

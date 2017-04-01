@@ -13,10 +13,12 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "chinese-to-pinyin": "^0.1.6",
     "superagent": "^3.5.0",
     "vue": "^2.1.0",
     "vue-resource": "^1.2.1",
-    "vue-router": "^2.3.0"
+    "vue-router": "^2.3.0",
+    "vuex": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

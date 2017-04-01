@@ -4,25 +4,21 @@
 
 'use strict';
 
-const PW        = require('png-word');
+const PW = require('png-word');
 
-const RW               = require('../util/randomWord');
+const RW               = require('../tools/randomWord');
 const adminUserService = require('../services/adminUser');
-const adminFunc        = require('../models/db/adminFunc');
 
 const rw       = RW('abcdefghijklmnopqrstuvwxyz1234567890');
 const pngword  = new PW(PW.GRAY);
-const siteInfo = config.siteInfo;
-const sysMsg   = config.sysMsg;
 
 module.exports = {
-  getAdminUsers: getAdminUsers,
-  addAdminUser: addAdminUser,
-  updateAdminUser: updateAdminUser,
-  delAdminUser: delAdminUser,
+  getAdminUsers   : getAdminUsers,
+  addAdminUser    : addAdminUser,
+  updateAdminUser : updateAdminUser,
+  delAdminUser    : delAdminUser,
   adminLogin      : adminLogin,
   verificationCode: verificationCode,
-  doLogin         : doLogin,
   logout          : logout
 };
 
@@ -84,7 +80,6 @@ function delAdminUser(req, res) {
   return adminUserService.delAdminUser(id).then((results) => {
     return res.json({code: 200, msg: results});
   }).catch((err) => {
-    console.log('=============', err);
     return res.json({code: 500, msg: err});
   });
 }
@@ -97,8 +92,7 @@ function delAdminUser(req, res) {
 function adminLogin(req, res) {
   req.session.vnum = rw.random(4);
   res.render('manage/adminLogin', {
-    title      : siteInfo.SITETITLE,
-    description: 'DoraCMS后台管理登录'
+    description: ''
   });
 }
 
@@ -114,47 +108,6 @@ function verificationCode(req, res) {
   });
 }
 
-/**
- * doLogin
- * @param {Object} req
- * @param {Object} res
- * @returns {*}
- */
-function doLogin(req, res) {
-  const userName = req.body.userName;
-  const password = req.body.password;
-  const vnum     = req.body.vnum;
-  const newPsd   = db.DbOpt.encrypt(password, config.encryptKey);
-
-  if (vnum != req.session.vnum) {
-    req.session.vnum = rw.random(4);
-    res.end('验证码有误！');
-  }
-
-  if (!utils.validator.isUserName(userName) || !utils.validator.isPsd(password)) {
-    res.end(sysMsg.systemIllegalParam);
-  }
-
-  return adminUserService.getAdminUserDetail({
-    userName: userName,
-    password: newPsd
-  }).then((user) => {
-    if (user) {
-      req.session.adminPower    = user.group.power;
-      req.session.adminlogined  = true;
-      req.session.adminUserInfo = user;
-      // 获取管理员通知信息
-      adminFunc.getAdminNotices(req, res, function (noticeObj) {
-        req.session.adminNotices = noticeObj;
-        // 存入操作日志
-        db.SystemOptionLog.addUserLoginLogs(req, res, adminFunc.getClienIp(req));
-        res.end('success');
-      });
-    } else {
-      res.end('用户名或密码错误');
-    }
-  });
-}
 
 /**
  * 退出登录

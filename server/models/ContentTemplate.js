@@ -8,7 +8,6 @@
 const mongoose = require('mongoose');
 const shortid  = require('shortid');
 
-const TemplateItems = require('./TemplateItems');
 
 const Schema = mongoose.Schema;
 
