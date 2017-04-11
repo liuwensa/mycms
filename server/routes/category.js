@@ -11,11 +11,11 @@ const categoryCtrl = require('../controllers/category');
 const router = express.Router();
 
 router.route('/category')
-  .get(categoryCtrl.getContentCategory)
-  .post(categoryCtrl.addContentCategory);
+  .get(categoryCtrl.getCategory)
+  .post(categoryCtrl.addCategory);
 
 router.route('/category/:id')
-  .put(categoryCtrl.updateContentCategory)
-  .delete(categoryCtrl.delContentCategory);
+  .put(categoryCtrl.updateCategory)
+  .delete(categoryCtrl.delCategory);
 
 module.exports = router;

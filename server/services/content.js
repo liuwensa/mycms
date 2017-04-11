@@ -5,11 +5,12 @@
 'use strict';
 
 module.exports = {
-  getContents     : getContents,
-  getContentDetail: getContentDetail,
-  getContentsCount: getContentsCount,
-  delContent      : delContent,
-  updateContent   : updateContent
+  getContents,
+  getContentDetail,
+  getContentsCount,
+  addContent,
+  delContent,
+  updateContent
 };
 
 /**
@@ -29,13 +30,13 @@ function getContents(options, orderBy, start, count) {
 
 /**
  * 获取文档的列表
- * @param options
+ * @param id
  * @returns {*}
  */
-function getContentDetail(options) {
-  return db.Content.findOne(options)
-    .populate('category')
-    .populate('author');
+function getContentDetail(id) {
+  return db.Content.findOne({_id: id});
+    // .populate('category')
+    // .populate('author');
 }
 
 /**
@@ -44,6 +45,15 @@ function getContentDetail(options) {
  */
 function getContentsCount(options) {
   return db.Content.count(options);
+}
+
+/**
+ * addContent
+ * @param options
+ */
+function addContent(options) {
+  const newObj = new db.Content(options);
+  return newObj.save();
 }
 
 /**

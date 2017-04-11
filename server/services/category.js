@@ -5,30 +5,30 @@
 'use strict';
 
 module.exports = {
-  getContentCategory   : getContentCategory,
-  addContentCategory   : addContentCategory,
-  delContentCategory   : delContentCategory,
-  updateContentCategory: updateContentCategory
+  getCategory   ,
+  addCategory   ,
+  delCategory   ,
+  updateCategory
 };
 
 /**
- * getContentCategory
+ * getCategory
  * @param options
  * @returns {*}
  */
-function getContentCategory(options) {
-  return db.ContentCategory
+function getCategory(options) {
+  return db.Category
     .find(options)
     .sort({'sortId': 1});
 }
 
 /**
- * addContentTags
+ * addTags
  * @param options
  * @returns {*}
  */
-function addContentCategory(options) {
-  const newObj = new db.ContentCategory(options);
+function addCategory(options) {
+  const newObj = new db.Category(options);
 
   if (newObj.parentID == '0') {
     newObj.defaultUrl = newObj.homePage;
@@ -42,20 +42,20 @@ function addContentCategory(options) {
 }
 
 /**
- * updateContentCategory
+ * updateCategory
  * @param {String} id
  * @param {Object} options
  * @returns {*}
  */
-function updateContentCategory(id, options) {
-  return db.ContentCategory.update({_id: id}, options);
+function updateCategory(id, options) {
+  return db.Category.update({_id: id}, options);
 }
 
 /**
- * delContentCategory
+ * delCategory
  * @param {String} id
  * @returns {*}
  */
-function delContentCategory(id) {
-  return db.ContentCategory.remove({_id: id});
+function delCategory(id) {
+  return db.Category.remove({_id: id});
 }

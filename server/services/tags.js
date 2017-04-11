@@ -5,10 +5,10 @@
 'use strict';
 
 module.exports = {
-  getTags         : getTags,
-  addContentTags  : addContentTags,
-  delContentTag   : delContentTag,
-  updateContentTag: updateContentTag
+  getTags,
+  addTags,
+  delTag,
+  updateTag
 };
 
 /**
@@ -17,43 +17,43 @@ module.exports = {
  * @returns {*}
  */
 function getTags(options) {
-  return db.ContentTags.find(options);
+  return db.Tags.find(options);
 }
 
 /**
- * addContentTags
+ * addTags
  * @param options
  * @returns {*}
  */
-function addContentTags(options) {
-  return db.ContentTags
+function addTags(options) {
+  return db.Tags
     .find()
     .or([{'name': options.name}, {alias: options.alias}])
     .then((tags) => {
       if (tags.length > 0) {
         throw new Error('名称或者别名已存在！');
       } else {
-        const newObj = new db.ContentTags(options);
+        const newObj = new db.Tags(options);
         return newObj.save();
       }
     });
 }
 
 /**
- * updateContentTag
+ * updateTag
  * @param {String} id
  * @param {Object} options
  * @returns {*}
  */
-function updateContentTag(id, options) {
-  return db.ContentTags.update({_id: id}, options);
+function updateTag(id, options) {
+  return db.Tags.update({_id: id}, options);
 }
 
 /**
- * delContentTag
+ * delTag
  * @param {String} id
  * @returns {*}
  */
-function delContentTag(id) {
-  return db.ContentTags.remove({_id: id});
+function delTag(id) {
+  return db.Tags.remove({_id: id});
 }

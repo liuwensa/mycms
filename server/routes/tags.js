@@ -12,10 +12,10 @@ const router = express.Router();
 
 router.route('/tags')
   .get(tagsCtrl.getTags)
-  .post(tagsCtrl.addContentTags);
+  .post(tagsCtrl.addTags);
 
 router.route('/tags/:id')
-  .put(tagsCtrl.updateContentTag)
-  .delete(tagsCtrl.delContentTag);
+  .put(tagsCtrl.updateTag)
+  .delete(tagsCtrl.delTag);
 
 module.exports = router;

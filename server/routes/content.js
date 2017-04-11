@@ -15,6 +15,7 @@ router.route('/content')
   .post(contentCtrl.addContent);
 
 router.route('/content/:id')
+  .get(contentCtrl.getContentDetail)
   .put(contentCtrl.updateContent)
   .delete(contentCtrl.delContent);
 

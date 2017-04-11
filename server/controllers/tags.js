@@ -8,10 +8,10 @@ const tagsService = require('../services/tags');
 
 
 module.exports = {
-  getTags         : getTags,
-  addContentTags  : addContentTags,
-  delContentTag   : delContentTag,
-  updateContentTag: updateContentTag
+  getTags,
+  addTags,
+  delTag,
+  updateTag
 };
 
 
@@ -34,21 +34,21 @@ function getTags(req, res) {
  * @param {Object} req
  * @param {Object} res
  */
-function addContentTags(req, res) {
+function addTags(req, res) {
   const options = req.body;
 
-  return tagsService.addContentTags(options)
+  return tagsService.addTags(options)
     .then((results) => {
       return res.json({code: 200, msg: results});
     });
 }
 
 /**
- * updateContentTag
+ * updateTag
  * @param {Object} req
  * @param {Object} res
  */
-function updateContentTag(req, res) {
+function updateTag(req, res) {
   const id = req.params.id;
 
   if (!shortid.isValid(id)) {
@@ -57,24 +57,24 @@ function updateContentTag(req, res) {
 
   const options = req.body;
 
-  return tagsService.updateContentTag(id, options).then((results) => {
+  return tagsService.updateTag(id, options).then((results) => {
     return res.json({code: 200, msg: results});
   });
 }
 
 /**
- * delContentTag
+ * delTag
  * @param {Object} req
  * @param {Object} res
  */
-function delContentTag(req, res) {
+function delTag(req, res) {
   const id = req.params.id;
 
   if (!shortid.isValid(id)) {
     return res.json({code: 500, msg: '参数错误'});
   }
 
-  return tagsService.delContentTag(id).then((results) => {
+  return tagsService.delTag(id).then((results) => {
     return res.json({code: 200, msg: results});
   });
 }

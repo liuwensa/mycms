@@ -8,21 +8,21 @@ const categoryService = require('../services/category');
 
 
 module.exports = {
-  getContentCategory   : getContentCategory,
-  addContentCategory   : addContentCategory,
-  delContentCategory   : delContentCategory,
-  updateContentCategory: updateContentCategory
+  getCategory,
+  addCategory,
+  delCategory,
+  updateCategory
 };
 
 
 /**
- * getContentCategory
+ * getCategory
  * @param {Object} req
  * @param {Object} res
  */
-function getContentCategory(req, res) {
+function getCategory(req, res) {
   const options = req.query || {};
-  return categoryService.getContentCategory(options)
+  return categoryService.getCategory(options)
     .then((results) => {
       const arrTree    = changeToTreeJson(results);
       const treeResult = utils.transData(arrTree);
@@ -31,11 +31,11 @@ function getContentCategory(req, res) {
 }
 
 /**
- * addContentCategory
+ * addCategory
  * @param {Object} req
  * @param {Object} res
  */
-function addContentCategory(req, res) {
+function addCategory(req, res) {
   const options = req.body;
   // const options = {
   //     parentID:'BJYBfouhl',
@@ -49,18 +49,18 @@ function addContentCategory(req, res) {
   //     keywords:'二级打怪',
   //     comments:'二级打怪'
   // };
-  return categoryService.addContentCategory(options)
+  return categoryService.addCategory(options)
     .then((results) => {
       return res.json({code: 200, msg: results});
     });
 }
 
 /**
- * updateContentCategory
+ * updateCategory
  * @param {Object} req
  * @param {Object} res
  */
-function updateContentCategory(req, res) {
+function updateCategory(req, res) {
   const id = req.params.id;
 
   if (!shortid.isValid(id)) {
@@ -69,24 +69,24 @@ function updateContentCategory(req, res) {
 
   const options = req.body;
 
-  return categoryService.updateContentCategory(id, options).then((results) => {
+  return categoryService.updateCategory(id, options).then((results) => {
     return res.json({code: 200, msg: results});
   });
 }
 
 /**
- * delContentCategory
+ * delCategory
  * @param {Object} req
  * @param {Object} res
  */
-function delContentCategory(req, res) {
+function delCategory(req, res) {
   const id = req.params.id;
 
   if (!shortid.isValid(id)) {
     return res.json({code: 500, msg: '参数错误'});
   }
 
-  return categoryService.delContentCategory(id).then((results) => {
+  return categoryService.delCategory(id).then((results) => {
     return res.json({code: 200, msg: results});
   });
 }

@@ -8,10 +8,11 @@ const contentService = require('../services/content');
 
 
 module.exports = {
-  getContents  : getContents,
-  addContent   : addContent,
-  delContent   : delContent,
-  updateContent: updateContent
+  getContents,
+  getContentDetail,
+  addContent,
+  delContent,
+  updateContent
 };
 
 
@@ -32,7 +33,8 @@ function getContents(req, res) {
   const options = {};
 
   if (category) {
-    options.category = category;
+    const categoryKey = new RegExp(category, 'i');
+    options.sortPath  = {$regex: categoryKey};
   }
 
   if (state === 0 || state === 1) {
@@ -70,6 +72,24 @@ function getContents(req, res) {
 }
 
 /**
+ * getContentDetail
+ * @param {Object} req
+ * @param {Object} res
+ */
+function getContentDetail(req, res) {
+  const id = req.params.id;
+
+  if (!shortid.isValid(id)) {
+    return res.json({code: 500, msg: '参数错误'});
+  }
+
+  return contentService.getContentDetail(id)
+    .then((results) => {
+    return res.json({code: 200, msg: results});
+  });
+}
+
+/**
  * addContent
  * @param {Object} req
  * @param {Object} res
@@ -88,7 +108,8 @@ function addContent(req, res) {
   //     keywords:'二级打怪',
   //     comments:'二级打怪'
   // };
-  return contentService.addContentCategory(options)
+
+  return contentService.addContent(options)
     .then((results) => {
       return res.json({code: 200, msg: results});
     });

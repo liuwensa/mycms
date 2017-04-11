@@ -1,12 +1,10 @@
 /**
- * Created by Administrator on 2015/4/15.
- * 管理员对象
+ * Created by admin on 2017/3/13.
  */
 
 'use strict';
 
 const mongoose = require('mongoose');
-const shortid  = require('shortid');
 
 const Schema = mongoose.Schema;
 
@@ -27,23 +25,8 @@ const AdminUserSchema = new Schema({
   date    : {type: Date, default: Date.now},
   logo    : {type: String, default: '/upload/images/defaultlogo.png'},
   auth    : {type: Boolean, default: false},
-  group   : {
-    type: String,
-    ref : 'AdminGroup'
-  }
+  group   : {type: String, ref : 'AdminGroup'}
 });
-
-AdminUserSchema.statics = {
-  getOneItem: function (res, targetId, callBack) {
-    AdminUser.findOne({'_id': targetId}).populate('group').exec(function (err, user) {
-      if (err) {
-        res.end(err);
-      }
-      callBack(user);
-    })
-  }
-};
-
 
 const AdminUser = mongoose.model('AdminUser', AdminUserSchema);
 
