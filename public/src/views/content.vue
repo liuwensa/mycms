@@ -2,20 +2,30 @@
   <div>
     <page-title title="文档管理"></page-title>
     <div class="row nav-tab mb20">
-      <div class="col-md-4">
+      <div class="col-md-2">
         <button class="btn btn-primary">添加文档</button>
       </div>
 
-      <div class="col-md-4">
-        <input v-model="searchKey" class="form-control" type="text" @keyup.enter="getContents()" placeholder="请输入要查询的关键字"/>
+      <div class="col-md-2">
+        <select class="form-control" v-model="category" @change="getContents()">
+          <option :value="''">全部</option>
+          <template v-for="category in categories">
+            <option :value="category.id">{{category.name}}</option>
+            <template v-for="children1 in category.children">
+              <option :value="children1.id">|------{{children1.name}}</option>
+              <template v-for="children2 in children1.children">
+                <option :value="children2.id">|------|------{{children2.name}}</option>
+              </template>
+            </template>
+          </template>
+        </select>
       </div>
 
-      <!--<div class="col-md-4">-->
-        <!--<div class="form-control">-->
-          <!--<input v-model="category" class="form-control" type="text" />-->
-          <hello></hello>
-        <!--</div>-->
-      <!--</div>-->
+      <div class="col-md-4">
+        <input v-model="searchKey" class="form-control" type="text" @keyup.enter="getContents()"
+               placeholder="请输入要查询的关键字"/>
+      </div>
+
     </div>
 
     <div class="panel panel-primary mt20">
@@ -34,15 +44,17 @@
         </thead>
         <tbody>
         <tr v-for="content in contents">
-          <td><img :src="content.sImg" class="cover" /></td>
+          <td><img :src="content.sImg" class="cover"/></td>
           <td>{{content.title}}</td>
           <td>{{content.date}}</td>
           <td>{{content.category.name}}</td>
           <td>{{content.clickNum}}</td>
           <td>{{content.state}}</td>
           <td>
-            <button class="btn btn-success" @click="publishContent(content._id, true)" v-show="!content.state">发布</button>
-            <button class="btn btn-warning" @click="publishContent(content._id, false)" v-show="content.state">取消发布</button>
+            <button class="btn btn-success" @click="publishContent(content._id, true)" v-show="!content.state">发布
+            </button>
+            <button class="btn btn-warning" @click="publishContent(content._id, false)" v-show="content.state">取消发布
+            </button>
             <button class="btn btn-default" @click="">修改</button>
             <button class="btn btn-danger" @click="delContents(content._id)">删除</button>
           </td>
@@ -66,35 +78,42 @@
 
 <script>
   import {getContents, delContents, updateContents} from '../apis/contents';
+  import {getCategory} from '../apis/category';
 
   import pageTitle from '../components/page-title.vue';
   import pagination from '../components/pagination.vue';
-  import Hello from './Hello.vue';
 
   export default {
     components: {
       pageTitle,
-      Hello,
       pagination
     },
     data      : function () {
       return {
-        contents: [],
-        searchKey: '',
-        pageSize: 10,
-        totalPage: 0,
-        currentpage: 1
+        contents   : [],
+        searchKey  : '',
+        pageSize   : 10,
+        totalPage  : 0,
+        currentpage: 1,
+        category   : '',
+        categories : []
       };
     },
     methods   : {
+      getCategory() {
+        getCategory().then((data) => {
+          this.categories = data;
+        });
+      },
       getContents() {
         getContents([], {
-          page: this.currentpage,
-          count: this.pageSize,
+          page     : this.currentpage,
+          count    : this.pageSize,
+          category : this.category,
           searchKey: this.searchKey
         }).then((data) => {
-          this.contents = data.list;
-          this.totalPage = Math.ceil(data.total/this.pageSize);
+          this.contents  = data.list;
+          this.totalPage = Math.ceil(data.total / this.pageSize);
         });
       },
       delContents(id) {
@@ -117,13 +136,14 @@
           console.log(err);
         });
       },
-      parentCallback( cPage )  {
+      parentCallback(cPage)  {
         this.currentpage = cPage;
         this.getContents();
       }
     },
     created () {
       this.getContents();
+      this.getCategory();
     }
   }
 </script>

@@ -59,7 +59,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#/content">文档管理</a></li>
-            <li><a href="#/category">文档类别管理</a></li>
+            <li><a href="#/categories">文档类别管理</a></li>
             <li><a href="#/tags">文档标签管理</a></li>
             <li><a href="#">留言管理</a></li>
             <li><a href="#">消息管理</a></li>

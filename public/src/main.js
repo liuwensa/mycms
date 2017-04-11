@@ -8,8 +8,9 @@ import Home from "./views/home.vue";
 import adminUsers from "./views/adminUsers.vue";
 import tags from "./views/tags.vue";
 import category from "./views/category.vue";
+import categories from "./views/categories.vue";
 import content from "./views/content.vue";
-import Hello from "./views/Hello.vue";
+import contentdetail from "./views/contentdetail.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -32,11 +33,20 @@ const routes = [
     component: category
   },
   {
+    path     : '/categories',
+    component: categories
+  },
+  {
     path     : '/content',
     component: content
-  }, {
-    path     : '/Hello',
-    component: Hello
+  },
+  {
+    path     : '/contentdetail',
+    component: contentdetail
+  },
+  {
+    path     : '/contentdetail/:id',
+    component: contentdetail
   },
   {
     path     : '*',

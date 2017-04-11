@@ -1,16 +1,14 @@
 /**
- * Created by Administrator on 2015/4/15.
- * 文章标签对象
+ * Created by admin on 2017/3/13.
  */
 
 'use strict';
 
 const mongoose = require('mongoose');
-const shortid  = require('shortid');
 
 const Schema = mongoose.Schema;
 
-const ContentTagsSchema = new Schema({
+const TagsSchema = new Schema({
   _id     : {
     type     : String,
     unique   : true,
@@ -22,6 +20,6 @@ const ContentTagsSchema = new Schema({
   comments: String
 });
 
-const ContentTags = mongoose.model('ContentTags', ContentTagsSchema);
+const Tags = mongoose.model('Tags', TagsSchema);
 
-module.exports = ContentTags;
+module.exports = Tags;
