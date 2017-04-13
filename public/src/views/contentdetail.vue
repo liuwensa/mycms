@@ -59,20 +59,19 @@
             <div class="form-group">
               <label class="control-label col-md-1">封面图片</label>
               <div class="col-md-8">
-                <input type="file" name="uploadify" id="uploadContentImg"/>
-                <img src="" alt="" width="120" height="120" class="img-thumbnail" id="myImg">
+                <image-uploader :src="content.coverImage" v-on:uploadImage='listenToMyBoy'></image-uploader>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-1">文章类别</label>
               <div class="col-md-8">
-                <select class="form-control" v-model="content.category">
+                <select class="form-control" v-model="content.sortPath">
                   <template v-for="category in categories">
-                    <option :value="category">{{category.name}}</option>
+                    <option :value="category.sortPath">{{category.name}}</option>
                     <template v-for="children1 in category.children">
-                      <option :value="children1">|------{{children1.name}}</option>
+                      <option :value="children1.sortPath">|------{{children1.name}}</option>
                       <template v-for="children2 in children1.children">
-                        <option :value="children2">|------|------{{children2.name}}</option>
+                        <option :value="children2.sortPath">|------|------{{children2.name}}</option>
                       </template>
                     </template>
                   </template>
@@ -83,14 +82,13 @@
             <div class="form-group">
               <label class="control-label col-md-1">内容摘要</label>
               <div class="col-md-8">
-                <textarea class="form-control input-sm" v-model="content.discription" placeholder="内容摘要"
-                          required></textarea>
+                <textarea class="form-control" rows="3" cols="3" v-model="content.discription" placeholder="内容摘要" required></textarea>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-1">文章详情</label>
               <div class="col-md-8">
-                <textarea class="form-control input-sm" v-model="content.content" placeholder="请输入文章详情"></textarea>
+                <textarea class="form-control" v-model="content.content" placeholder="请输入文章详情"></textarea>
               </div>
             </div>
 
@@ -113,10 +111,12 @@
   import {getCategory} from '../apis/category';
 
   import pageTitle from '../components/page-title.vue';
+  import imageUploader from '../components/image-uploader.vue';
 
   export default {
     components: {
-      pageTitle
+      pageTitle,
+      imageUploader
     },
     data      : function () {
       return {
@@ -150,10 +150,10 @@
       postData() {
         let subFun;
 
-        const category = this.content.category;
+        const sortPath = this.content.sortPath;
 
-        this.content.category = category.id;
-        this.content.sortPath = category.sortPath;
+        const categories = sortPath.split(',');
+        this.content.category = categories[categories.length - 1];
 
         const params = [];
 
@@ -165,7 +165,11 @@
         }
 
         subFun(this.content, params).then(() => {
+          this.$router.go(-1);
         });
+      },
+      listenToMyBoy (src) {
+        this.content.coverImage = src
       }
     },
     created () {

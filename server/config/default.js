@@ -34,5 +34,6 @@ module.exports = {
     logFileDir    : 'E:\\raid\\logs\\nodecms\\',
     needConsole   : true,
     replaceConsole: true
-  }
+  },
+  imageUrl: 'http://127.0.0.1:20008'
 };

@@ -49,8 +49,8 @@
                 <td></td>
                 <td>{{children2.name}}</td>
                 <td>
-                  <button class="btn btn-default" @click="updateCategory(children1)">修改</button>
-                  <button class="btn btn-danger" @click="delCategory(children1.id)">删除</button>
+                  <button class="btn btn-default" @click="updateCategory(children2)">修改</button>
+                  <button class="btn btn-danger" @click="delCategory(children2.id)">删除</button>
                 </td>
               </tr>
             </template>
@@ -204,7 +204,7 @@
       addCategory(model)  {
         this.newCategory = {
           parentID  : model.id,
-          sortPath  : model.sortPath + ',' + model.id,
+          sortPath  : model.sortPath,
           defaultUrl: model.defaultUrl,
           state     : 1
         };

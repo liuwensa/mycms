@@ -46,6 +46,7 @@ const routes = [
   },
   {
     path     : '/contentdetail/:id',
+    name: 'contentdetail',
     component: contentdetail
   },
   {

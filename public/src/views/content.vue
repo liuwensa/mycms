@@ -3,7 +3,7 @@
     <page-title title="文档管理"></page-title>
     <div class="row nav-tab mb20">
       <div class="col-md-2">
-        <button class="btn btn-primary">添加文档</button>
+          <router-link class="btn btn-primary" to="/contentdetail">添加文档</router-link>
       </div>
 
       <div class="col-md-2">
@@ -38,7 +38,6 @@
           <th>创建时间</th>
           <th>类别</th>
           <th>阅读量</th>
-          <th>显示</th>
           <th>操作</th>
         </tr>
         </thead>
@@ -47,15 +46,14 @@
           <td><img :src="content.sImg" class="cover"/></td>
           <td>{{content.title}}</td>
           <td>{{content.date}}</td>
-          <td>{{content.category.name}}</td>
+          <td>{{content.category? content.category.name: ''}}</td>
           <td>{{content.clickNum}}</td>
-          <td>{{content.state}}</td>
           <td>
-            <button class="btn btn-success" @click="publishContent(content._id, true)" v-show="!content.state">发布
+            <button class="btn btn-success" @click="publishContent(content._id, true)" v-show="!content.ispublish">发布
             </button>
-            <button class="btn btn-warning" @click="publishContent(content._id, false)" v-show="content.state">取消发布
+            <button class="btn btn-warning" @click="publishContent(content._id, false)" v-show="content.ispublish">取消发布
             </button>
-            <button class="btn btn-default" @click="">修改</button>
+            <router-link class="btn btn-default" :to="{name: 'contentdetail', params: {id: content._id}}">修改</router-link>
             <button class="btn btn-danger" @click="delContents(content._id)">删除</button>
           </td>
         </tr>
@@ -127,9 +125,9 @@
           });
         });
       },
-      publishContent(id, state) {
+      publishContent(id, ispublish) {
         updateContents({
-          state: state
+          ispublish: ispublish
         }, [id]).then((data) => {
           this.getContents();
         }).catch((err) => {

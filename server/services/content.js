@@ -35,7 +35,7 @@ function getContents(options, orderBy, start, count) {
  */
 function getContentDetail(id) {
   return db.Content.findOne({_id: id});
-    // .populate('category')
+    // .populate('category');
     // .populate('author');
 }
 
