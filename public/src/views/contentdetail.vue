@@ -42,16 +42,15 @@
                   <input type="text" class="form-control" v-model="content.tags" onclick="showTagsMenu()"
                          placeholder="标签用逗号隔开，单个标签不可超过6个字，不得超过4个标签" required/>
                   <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" id="menuBtn"
-                            onclick="showTagsMenu(); return false;">
-                      选择
-                      <span class="fa fa-caret-down"></span>
+                    <button type="button" class="btn btn-default dropdown-toggle" onclick="showTagsMenu()">
+                      选择<span class="fa fa-caret-down"></span>
                     </button>
-                    <div id="menuContent" class="menuContent dropdown-menu"
-                         style="display:none; position: absolute;z-index: 999">
-                      <ul class="ztree" id="tagsTree"
-                          style="margin-top: 0;width: 180px;max-height: 200px;overflow-y: auto;padding: 10px;background: #fff;"></ul>
-                    </div>
+                    <!--<div>-->
+                      <!--<ul class="col-md-1">-->
+                        <!--<li><input type="checkbox" value="争霸">争霸</li>-->
+                        <!--<li><input type="checkbox" value="英雄">英雄</li>-->
+                      <!--</ul>-->
+                    <!--</div>-->
                   </div>
                 </div>
               </div>
@@ -82,7 +81,8 @@
             <div class="form-group">
               <label class="control-label col-md-1">内容摘要</label>
               <div class="col-md-8">
-                <textarea class="form-control" rows="3" cols="3" v-model="content.discription" placeholder="内容摘要" required></textarea>
+                <textarea class="form-control" rows="3" cols="3" v-model="content.discription" placeholder="内容摘要"
+                          required></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -109,6 +109,7 @@
 <script>
   import {getContent, addContents, updateContents} from '../apis/contents';
   import {getCategory} from '../apis/category';
+  import {getTags} from '../apis/tags';
 
   import pageTitle from '../components/page-title.vue';
   import imageUploader from '../components/image-uploader.vue';
@@ -122,9 +123,10 @@
     },
     data      : function () {
       return {
-        editor: '',
+        editor    : '',
         errors    : [],
         categories: [],
+        tags      : [],
         id        : 0,
         content   : {
           title      : '',
@@ -150,12 +152,17 @@
           this.categories = data;
         });
       },
+      getTags() {
+        getTags().then((data) => {
+          this.tags = data;
+        });
+      },
       postData() {
         let subFun;
 
         const sortPath = this.content.sortPath;
 
-        const categories = sortPath.split(',');
+        const categories      = sortPath.split(',');
         this.content.category = categories[categories.length - 1];
 
         const params = [];

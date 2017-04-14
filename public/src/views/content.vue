@@ -47,7 +47,7 @@
           <td>{{content.title}}</td>
           <td>{{content.date}}</td>
           <td>{{content.category? content.category.name: ''}}</td>
-          <td>{{content.clickNum}}</td>
+          <td>{{content.pviews}}</td>
           <td>
             <button class="btn btn-success" @click="publishContent(content._id, true)" v-show="!content.ispublish">发布
             </button>

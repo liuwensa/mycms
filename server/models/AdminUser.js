@@ -23,7 +23,6 @@ const AdminUserSchema = new Schema({
   phoneNum: Number,
   comments: String,
   date    : {type: Date, default: Date.now},
-  logo    : {type: String, default: '/upload/images/defaultlogo.png'},
   auth    : {type: Boolean, default: false},
   group   : {type: String, ref : 'AdminGroup'}
 });
