@@ -1,6 +1,6 @@
 <template>
   <div class="uploader">
-    <div class="msg msg-{{msgType}}" v-show="hasMsg">{{msg}}</div>
+    <div class="msg msg-info" v-show="hasMsg">{{msg}}</div>
     <div class="close-icon" @click="removeImage()" v-show="showRemove">&times;</div>
     <button class="add" type="button"><i class="fa fa-plus"></i></button>
     <table>
@@ -37,7 +37,7 @@
         reader.onloadend = () => {
           const postData = {
             'Content-Type': file.type || 'multipart/form-data',
-            file          : file
+            upfile          : file
           };
 
           uploadImage(postData)
@@ -63,7 +63,7 @@
       },
       removeImage() {
         this.src = '';
-        this.$emit('uploadImage', this.src)
+        this.$emit('uploadImage', this.src);
       }
     }
   };

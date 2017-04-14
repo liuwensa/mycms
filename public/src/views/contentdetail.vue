@@ -88,7 +88,7 @@
             <div class="form-group">
               <label class="control-label col-md-1">文章详情</label>
               <div class="col-md-8">
-                <textarea class="form-control" v-model="content.content" placeholder="请输入文章详情"></textarea>
+                <VueUEditor @ready="editorReady"></VueUEditor>
               </div>
             </div>
 
@@ -112,14 +112,17 @@
 
   import pageTitle from '../components/page-title.vue';
   import imageUploader from '../components/image-uploader.vue';
+  import VueUEditor from '../components/UEditor.vue';
 
   export default {
     components: {
+      VueUEditor,
       pageTitle,
       imageUploader
     },
     data      : function () {
       return {
+        editor: '',
         errors    : [],
         categories: [],
         id        : 0,
@@ -170,6 +173,12 @@
       },
       listenToMyBoy (src) {
         this.content.coverImage = src
+      },
+      editorReady (editorInstance) {
+        editorInstance.setContent(this.content.content);
+        editorInstance.addListener('contentChange', () => {
+          this.content.content = editorInstance.getContent();
+        });
       }
     },
     created () {

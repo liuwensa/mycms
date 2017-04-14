@@ -59,6 +59,9 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel',
+        query: {
+          presets: ["es2015"]
+        },
         include: [
           path.join(projectRoot, 'src')
         ],
