@@ -1,16 +1,26 @@
+/**
+ * Created by admin on 2017/6/12.
+ */
+
 'use strict';
 
 const express = require('express');
 
-const adminUserCtrl = require('../controllers/adminUser');
-const adminCtrl = require('../controllers/admin');
+const adminUserCtrl = require('../../controllers/adminUser');
+const adminCtrl     = require('../../controllers/admin');
 
 const router = express.Router();
 
 router.get('/', function (req, res) {
-  return res.render('index.html');
+  if (req.session && req.session.userInfo) {
+    res.locals.userInfo = req.session.userInfo;
+    return res.render('index.html');
+  } else {
+    return res.render('login.html');
+  }
 });
 
+router.post('/login', adminUserCtrl.login);
 router.get('/vnum', adminUserCtrl.verificationCode);
 router.get('/logout', adminUserCtrl.logout);
 

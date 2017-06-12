@@ -4,7 +4,7 @@
 
 import {get, post, put, del} from './helper';
 
-export const getAdminUsers = get.bind(null, '/adminuser/users');
-export const delAdminUser = del.bind(null, '/adminuser/users');
-export const addAdminUser = post.bind(null, '/adminuser/users');
-export const updateAdminUser = put.bind(null, '/adminuser/users');
+export const getAdminUsers = get.bind(null, '/adminapi/users');
+export const delAdminUser = del.bind(null, '/adminapi/users');
+export const addAdminUser = post.bind(null, '/adminapi/users');
+export const updateAdminUser = put.bind(null, '/adminapi/users');

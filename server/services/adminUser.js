@@ -5,12 +5,11 @@
 'use strict';
 
 module.exports = {
-  getAdminUsers: getAdminUsers,
-  addAdminUser: addAdminUser,
-  updateAdminUser: updateAdminUser,
-  delAdminUser: delAdminUser,
-  getAdminUserDetail: getAdminUserDetail,
-
+  getAdminUsers,
+  addAdminUser,
+  updateAdminUser,
+  delAdminUser,
+  getAdminUserDetail
 };
 
 /**
@@ -18,7 +17,7 @@ module.exports = {
  * @param options
  * @returns {*}
  */
-function getAdminUsers(options) {
+function getAdminUsers(options = {}) {
   return db.AdminUser.find(options)
     .sort({'date': -1})
     .populate('group');
@@ -58,7 +57,7 @@ function delAdminUser(id) {
  * @param options
  * @returns {*}
  */
-function getAdminUserDetail(options) {
+function getAdminUserDetail(options = {}) {
   return db.AdminUser.findOne(options)
     .populate('group');
 }
