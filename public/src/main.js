@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import VueResource from "vue-resource";
+import vSelect from 'vue-select'
 
 import App from "./App";
 
@@ -14,6 +15,8 @@ import contentdetail from "./views/contentdetail.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+// Vue.use(VueResource);
+Vue.component('v-select', vSelect);
 
 const routes = [
   {

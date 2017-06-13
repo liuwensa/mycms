@@ -38,21 +38,7 @@
             <div class="form-group">
               <label class="control-label col-md-1">TAG标签</label>
               <div class="col-md-8">
-                <div class="input-group">
-                  <input type="text" class="form-control" v-model="content.tags" onclick="showTagsMenu()"
-                         placeholder="标签用逗号隔开，单个标签不可超过6个字，不得超过4个标签" required/>
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" onclick="showTagsMenu()">
-                      选择<span class="fa fa-caret-down"></span>
-                    </button>
-                    <!--<div>-->
-                      <!--<ul class="col-md-1">-->
-                        <!--<li><input type="checkbox" value="争霸">争霸</li>-->
-                        <!--<li><input type="checkbox" value="英雄">英雄</li>-->
-                      <!--</ul>-->
-                    <!--</div>-->
-                  </div>
-                </div>
+                <v-select placeholder="标签" multiple push-tags taggable :options="tags" v-model="content.tags"></v-select>
               </div>
             </div>
             <div class="form-group">
@@ -153,27 +139,22 @@
         });
       },
       getTags() {
-        getTags().then((data) => {
+        getTags([], {onlyName: 1}).then((data) => {
           this.tags = data;
         });
       },
       postData() {
         let subFun;
-
         const sortPath = this.content.sortPath;
-
         const categories      = sortPath.split(',');
         this.content.category = categories[categories.length - 1];
-
         const params = [];
-
         if (this.id) {
           subFun = updateContents;
           params.push(this.id);
         } else {
           subFun = addContents;
         }
-
         subFun(this.content, params).then(() => {
           this.$router.go(-1);
         });
@@ -189,11 +170,14 @@
       }
     },
     created () {
+      $("#tagSelect2").select2({tags: true});
       this.id = this.$route.params.id;
       this.getCategory();
+      this.getTags();
       if (this.id) {
         getContent([this.id], {}).then((data) => {
-          this.content = data;
+          this.content      = data;
+          this.content.tags = this.content.tags.split(',')
         });
       }
     }

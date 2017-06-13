@@ -22,10 +22,15 @@ module.exports = {
  */
 function getTags(req, res) {
   const options = req.query || {};
-
+  const onlyName = options.onlyName || 0;
+  delete options.onlyName;
   return tagsService.getTags(options)
     .then((results) => {
-      return res.json({code: 200, msg: results});
+      let tags = results;
+      if (onlyName) {
+        tags = utils._.map(tags, 'name');
+      }
+      return res.json({code: 200, msg: tags});
     });
 }
 

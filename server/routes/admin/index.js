@@ -6,8 +6,7 @@
 
 const express = require('express');
 
-const adminUserCtrl = require('../../controllers/adminUser');
-const adminCtrl     = require('../../controllers/admin');
+const adminCtrl = require('../../controllers/admin');
 
 const router = express.Router();
 
@@ -20,9 +19,9 @@ router.get('/', function (req, res) {
   }
 });
 
-router.post('/login', adminUserCtrl.login);
-router.get('/vnum', adminUserCtrl.verificationCode);
-router.get('/logout', adminUserCtrl.logout);
+router.post('/login', adminCtrl.login);
+router.get('/vnum', adminCtrl.verificationCode);
+router.get('/logout', adminCtrl.logout);
 
 router.post('/upload/images', adminCtrl.uploadImage);
 router.post('/ueditor/upload/image', adminCtrl.uploadUeditorImage);

@@ -29,7 +29,6 @@ function renderFile(filePath, data, callback) {
   var rootPath = path.join(__dirname, '../views/');
   fs.readFile(rootPath + filePath, {flag: 'r+', encoding: 'utf8'}, function (err, result) {
     if (err) {
-      console.log(err);
       return;
     }
     let html = ejs.render(result, data);
@@ -42,7 +41,6 @@ function saveFile(filePath, data, callback) {
   mkdirp(rootPath, (err) => {
     fs.writeFile(rootPath + filePath, data, function (err) {
       if (err) {
-        console.error(err);
       } else {
         callback()
       }

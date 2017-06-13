@@ -43,7 +43,7 @@
         </thead>
         <tbody>
         <tr v-for="content in contents">
-          <td><img :src="content.sImg" class="cover"/></td>
+          <td><img :src="content.coverImage" class="cover" width="80px"/></td>
           <td>{{content.title}}</td>
           <td>{{content.date}}</td>
           <td>{{content.category? content.category.name: ''}}</td>

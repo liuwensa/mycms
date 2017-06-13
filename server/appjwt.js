@@ -47,7 +47,6 @@ app.post("/login", function (req, res) {
 });
 
 app.post("/user", function (req, res) {
-  console.log(req.user)
   res.status(200).json(req.user)
 });
 

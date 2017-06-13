@@ -6,12 +6,82 @@
 
 const request = require('request');
 const rp      = require('request-promise');
+const PW      = require('png-word');
+
+const adminUserService = require('../services/adminUser');
+const RW               = require('../tools/randomWord');
+
+const rw      = RW('abcdefghijklmnopqrstuvwxyz1234567890');
+const pngword = new PW(PW.GRAY);
 
 module.exports = {
+  verificationCode,
+  login,
+  logout,
   uploadImage,
   uploadUeditorImage,
   remoteUeditorImage
 };
+
+/**
+ * 登录验证
+ * @param req
+ * @param res
+ * @param next
+ * @returns {*}
+ */
+function login(req, res, next) {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  if (!username) {
+    return next({code: 500, desc: '参数错误：username！'});
+  }
+
+  if (!password) {
+    return next({code: 500, desc: '参数错误：password！'});
+  }
+
+  return adminUserService.getAdminUserDetail({name: username})
+    .then((result) => {
+      if (!result) {
+        return next({code: 500, desc: '用户不存在！'});
+      } else if (result.password === password) {
+        const userInfo       = {
+          name    : result.name,
+          userName: result.userName
+        };
+        req.session.vnum     = rw.random(4);
+        req.session.userInfo = userInfo;
+        return next({code: 200, msg: userInfo});
+      } else {
+        return next({code: 500, desc: '密码不正确！'});
+      }
+    });
+}
+
+/**
+ * 获取验证码
+ * @param {Object} req
+ * @param {Object} res
+ */
+function verificationCode(req, res) {
+  const word = req.session.vnum;
+  pngword.createPNG(word, function (word) {
+    res.end(word);
+  });
+}
+
+
+/**
+ * 退出登录
+ * @param {Object} req
+ * @param {Object} res
+ */
+function logout(req, res, next) {
+  req.session.destroy();
+  return next({code: 200, msg: '退出登录成功！'});
+}
 
 function uploadImage(req, res) {
   const url = `${config.imageUrl}/upload/images`;

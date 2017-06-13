@@ -30,7 +30,8 @@ exports.resultHandle = function (options) {
 
   let views = options.views;
 
-  if (options.statusCode) {  //定义应用级返回码
+  // 定义应用级返回码
+  if (options.statusCode) {
     for (let key in options.statusCode) {
       codeToStatus[options.statusCode[key].code] = options.statusCode[key];
     }
@@ -148,7 +149,6 @@ exports.resultHandle = function (options) {
         extData   : ext
       };
 
-      console.log(retObj)
       let format = result.format || req.query.format || defaultFormat;
       if (format === JSONSTRING) {
         res.send(JSON.stringify(retObj));
