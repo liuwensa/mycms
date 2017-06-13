@@ -1,6 +1,3 @@
-/**
- * Created by Administrator on 2015/7/31.
- */
 
 'use strict';
 
@@ -12,7 +9,6 @@ const base = [
 ];
 
 const extend = [];
-
 
 const statusToCode = {};
 const codeToStatus = {};

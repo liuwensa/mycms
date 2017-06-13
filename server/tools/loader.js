@@ -8,7 +8,6 @@ var path = __dirname;
 var self = __filename.substring(__dirname.length + 1);
 
 
-
 var files = fs.readdirSync(path);
 files.forEach(function(filename) {
     if(filename == self)

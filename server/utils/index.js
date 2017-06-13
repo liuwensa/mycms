@@ -26,7 +26,7 @@ validator.extend('isQQ', function (str) {
   return RegExp(/^[1-9][0-9]{4,9}$/).test(str);
 });
 
-//只能是英文
+// 只能是英文
 validator.extend('isEn', function (str) {
   return /^\S+[a-z A-Z]$/.test(str);
 });

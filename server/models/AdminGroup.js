@@ -4,16 +4,13 @@
 
 'use strict';
 
-var mongoose = require('mongoose');
-var shortid  = require('shortid');
-var Schema   = mongoose.Schema;
+const mongoose = require('mongoose');
+const shortid  = require('shortid');
 
-var AdminGroupSchema = new Schema({
-  _id     : {
-    type     : String,
-    unique   : true,
-    'default': shortid.generate
-  },
+const Schema = mongoose.Schema;
+
+const AdminGroupSchema = new Schema({
+  _id     : {type: String, unique: true, default: shortid.generate},
   name    : String,
   power   : String,
   date    : {type: Date, default: Date.now},
@@ -21,6 +18,6 @@ var AdminGroupSchema = new Schema({
 });
 
 
-var AdminGroup = mongoose.model('AdminGroup', AdminGroupSchema);
+const AdminGroup = mongoose.model('AdminGroup', AdminGroupSchema);
 
 module.exports = AdminGroup;

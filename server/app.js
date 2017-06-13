@@ -32,8 +32,7 @@ app.engine('.html', ejs.__express);
 app.engine('.ejs', ejs.__express);
 app.use(partials());
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(log4js.connectLogger(logger, config.log));
 app.use(bodyParser.json({limit: '50mb'})); // 限制上传5M
 app.use(bodyParser.urlencoded({extended: false, limit: '50mb'}));
