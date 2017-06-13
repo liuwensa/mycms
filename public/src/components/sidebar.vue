@@ -14,11 +14,6 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#/adminUsers">系统用户管理</a></li>
-            <!--<li><a href="#">用户组设定</a></li>-->
-            <!--<li><a href="#">广告管理</a></li>-->
-            <!--<li><a href="#">文件管理器</a></li>-->
-            <!--<li><a href="#">数据管理</a></li>-->
-            <!--<li><a href="#">系统日志管理</a></li>-->
           </ul>
         </li>
 
@@ -32,8 +27,6 @@
             <li><a href="#/content">文档管理</a></li>
             <li><a href="#/categories">文档类别管理</a></li>
             <li><a href="#/tags">文档标签管理</a></li>
-            <!--<li><a href="#">留言管理</a></li>-->
-            <!--<li><a href="#">消息管理</a></li>-->
           </ul>
         </li>
       </ul>
