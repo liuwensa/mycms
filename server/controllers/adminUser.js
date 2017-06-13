@@ -6,13 +6,13 @@
 
 const adminUserService = require('../services/adminUser');
 
-module.exports = {
+module.exports = handleError({
   getAdminUserDtl,
   getAdminUsers,
   addAdminUser,
   updateAdminUser,
   delAdminUser,
-};
+});
 
 /**
  * 获取系统用户列表

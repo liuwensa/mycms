@@ -14,14 +14,14 @@ const RW               = require('../tools/randomWord');
 const rw      = RW('abcdefghijklmnopqrstuvwxyz1234567890');
 const pngword = new PW(PW.GRAY);
 
-module.exports = {
+module.exports = handleError({
   verificationCode,
   login,
   logout,
   uploadImage,
   uploadUeditorImage,
   remoteUeditorImage
-};
+});
 
 /**
  * 登录验证

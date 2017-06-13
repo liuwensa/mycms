@@ -7,12 +7,12 @@
 const tagsService = require('../services/tags');
 
 
-module.exports = {
+module.exports = handleError({
   getTags,
   addTags,
   delTag,
   updateTag
-};
+});
 
 
 /**
@@ -21,7 +21,7 @@ module.exports = {
  * @param {Object} res
  */
 function getTags(req, res) {
-  const options = req.query || {};
+  const options  = req.query || {};
   const onlyName = options.onlyName || 0;
   delete options.onlyName;
   return tagsService.getTags(options)

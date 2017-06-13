@@ -9,9 +9,10 @@ global.shortid = require('shortid');
 global.Promise = require('bluebird');
 global.config  = require('config');
 
-global.utils  = require('./utils');
-global.logger = require('./logger').getLogger('main');
-global.db     = require('./models');
+global.utils       = require('./utils');
+global.logger      = require('./logger').getLogger('main');
+global.db          = require('./models');
+global.handleError = require('./middlewares/handle-error');
 
 // 对Date的扩展，将 Date 转化为指定格式的String
 // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，

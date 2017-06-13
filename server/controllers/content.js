@@ -7,13 +7,13 @@
 const contentService = require('../services/content');
 
 
-module.exports = {
+module.exports = handleError({
   getContents,
   getContentDetail,
   addContent,
   delContent,
   updateContent
-};
+});
 
 
 /**

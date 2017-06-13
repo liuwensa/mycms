@@ -7,12 +7,12 @@
 const categoryService = require('../services/category');
 
 
-module.exports = {
+module.exports = handleError({
   getCategory,
   addCategory,
   delCategory,
   updateCategory
-};
+});
 
 
 /**
