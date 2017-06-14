@@ -10,12 +10,12 @@ import adminUsers from "./views/adminUsers.vue";
 import tags from "./views/tags.vue";
 import category from "./views/category.vue";
 import categories from "./views/categories.vue";
+import menus from "./views/menus.vue";
 import content from "./views/content.vue";
 import contentdetail from "./views/contentdetail.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
-// Vue.use(VueResource);
 Vue.component('v-select', vSelect);
 
 const routes = [
@@ -38,6 +38,10 @@ const routes = [
   {
     path     : '/categories',
     component: categories
+  },
+  {
+    path     : '/menus',
+    component: menus
   },
   {
     path     : '/content',

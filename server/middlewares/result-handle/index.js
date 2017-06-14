@@ -1,4 +1,3 @@
-
 'use strict';
 
 const fs     = require('fs');
@@ -139,11 +138,11 @@ exports.resultHandle = function (options) {
         }
       }
       let retObj = {
-        succeed   : final.succeed,
-        code      : final.code,
-        desc      : desc,
-        message   : msg,
-        extData   : ext
+        succeed: final.succeed,
+        code   : final.code,
+        desc   : desc,
+        msg    : msg,
+        extData: ext
       };
 
       let format = result.format || req.query.format || defaultFormat;

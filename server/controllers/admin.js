@@ -47,10 +47,12 @@ function login(req, res, next) {
       if (!result) {
         return next({code: 500, desc: '用户不存在！'});
       } else if (result.password === password) {
-        const userInfo       = {
-          name    : result.name,
-          userName: result.userName
-        };
+        const userInfo       = result;
+        delete userInfo.password;
+        //       {
+        //   name    : result.name,
+        //   userName: result.userName
+        // };
         req.session.vnum     = rw.random(4);
         req.session.userInfo = userInfo;
         return next({code: 200, msg: userInfo});

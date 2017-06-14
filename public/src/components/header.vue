@@ -15,105 +15,14 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+
+      <ul class="nav navbar-nav">
+        <li class="li-active">内容管理</li>
+        <li>系统管理</li>
+      </ul>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!--&lt;!&ndash; Messages: style can be found in dropdown.less&ndash;&gt;-->
-          <!--<li class="dropdown messages-menu">-->
-            <!--&lt;!&ndash; Menu toggle button &ndash;&gt;-->
-            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-              <!--<i class="fa fa-envelope-o"></i>-->
-              <!--<span class="label label-success">4</span>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu">-->
-              <!--<li class="header">You have 4 messages</li>-->
-              <!--<li>-->
-                <!--&lt;!&ndash; inner menu: contains the messages &ndash;&gt;-->
-                <!--<ul class="menu">-->
-                  <!--<li>&lt;!&ndash; start message &ndash;&gt;-->
-                    <!--<a href="#">-->
-                      <!--<div class="pull-left">-->
-                        <!--&lt;!&ndash; User Image &ndash;&gt;-->
-                        <!--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
-                      <!--</div>-->
-                      <!--&lt;!&ndash; Message title and timestamp &ndash;&gt;-->
-                      <!--<h4>-->
-                        <!--Support Team-->
-                        <!--<small><i class="fa fa-clock-o"></i> 5 mins</small>-->
-                      <!--</h4>-->
-                      <!--&lt;!&ndash; The message &ndash;&gt;-->
-                      <!--<p>Why not buy a new awesome theme?</p>-->
-                    <!--</a>-->
-                  <!--</li>-->
-                  <!--&lt;!&ndash; end message &ndash;&gt;-->
-                <!--</ul>-->
-                <!--&lt;!&ndash; /.menu &ndash;&gt;-->
-              <!--</li>-->
-              <!--<li class="footer"><a href="#">See All Messages</a></li>-->
-            <!--</ul>-->
-          <!--</li>-->
-          <!--&lt;!&ndash; /.messages-menu &ndash;&gt;-->
-
-          <!--&lt;!&ndash; Notifications Menu &ndash;&gt;-->
-          <!--<li class="dropdown notifications-menu">-->
-            <!--&lt;!&ndash; Menu toggle button &ndash;&gt;-->
-            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-              <!--<i class="fa fa-bell-o"></i>-->
-              <!--<span class="label label-warning">10</span>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu">-->
-              <!--<li class="header">You have 10 notifications</li>-->
-              <!--<li>-->
-                <!--&lt;!&ndash; Inner Menu: contains the notifications &ndash;&gt;-->
-                <!--<ul class="menu">-->
-                  <!--<li>&lt;!&ndash; start notification &ndash;&gt;-->
-                    <!--<a href="#">-->
-                      <!--<i class="fa fa-users text-aqua"></i> 5 new members joined today-->
-                    <!--</a>-->
-                  <!--</li>-->
-                  <!--&lt;!&ndash; end notification &ndash;&gt;-->
-                <!--</ul>-->
-              <!--</li>-->
-              <!--<li class="footer"><a href="#">View all</a></li>-->
-            <!--</ul>-->
-          <!--</li>-->
-          <!--&lt;!&ndash; Tasks Menu &ndash;&gt;-->
-          <!--<li class="dropdown tasks-menu">-->
-            <!--&lt;!&ndash; Menu Toggle Button &ndash;&gt;-->
-            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-              <!--<i class="fa fa-flag-o"></i>-->
-              <!--<span class="label label-danger">9</span>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu">-->
-              <!--<li class="header">You have 9 tasks</li>-->
-              <!--<li>-->
-                <!--&lt;!&ndash; Inner menu: contains the tasks &ndash;&gt;-->
-                <!--<ul class="menu">-->
-                  <!--<li>&lt;!&ndash; Task item &ndash;&gt;-->
-                    <!--<a href="#">-->
-                      <!--&lt;!&ndash; Task title and progress text &ndash;&gt;-->
-                      <!--<h3>-->
-                        <!--Design some buttons-->
-                        <!--<small class="pull-right">20%</small>-->
-                      <!--</h3>-->
-                      <!--&lt;!&ndash; The progress bar &ndash;&gt;-->
-                      <!--<div class="progress xs">-->
-                        <!--&lt;!&ndash; Change the css width attribute to simulate progress &ndash;&gt;-->
-                        <!--<div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"-->
-                             <!--aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">-->
-                          <!--<span class="sr-only">20% Complete</span>-->
-                        <!--</div>-->
-                      <!--</div>-->
-                    <!--</a>-->
-                  <!--</li>-->
-                  <!--&lt;!&ndash; end task item &ndash;&gt;-->
-                <!--</ul>-->
-              <!--</li>-->
-              <!--<li class="footer">-->
-                <!--<a href="#">View all tasks</a>-->
-              <!--</li>-->
-            <!--</ul>-->
-          <!--</li>-->
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -127,7 +36,6 @@
               <!-- The user image in the menu -->
               <li class="user-header">
                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                 <p>
                   {{userInfo.name}} - {{userInfo.userName}}
                 </p>
@@ -135,7 +43,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">修改个人信息</a>
+                  <!--<a href="#" class="btn btn-default btn-flat">修改个人信息</a>-->
                 </div>
                 <div class="pull-right">
                   <button type="button" class="btn btn-default btn-flat" @click="logout()">退出登录</button>

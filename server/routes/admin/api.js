@@ -10,6 +10,7 @@ const userCtr      = require('../../controllers/adminUser');
 const categoryCtrl = require('../../controllers/category');
 const contentCtrl  = require('../../controllers/content');
 const tagsCtrl     = require('../../controllers/tags');
+const menusCtrl     = require('../../controllers/menus');
 
 const router = express.Router();
 
@@ -46,5 +47,13 @@ router.route('/tags')
 router.route('/tags/:id')
   .put(tagsCtrl.updateTag)
   .delete(tagsCtrl.delTag);
+
+router.route('/menus')
+  .get(menusCtrl.getMenus)
+  .post(menusCtrl.addMenus);
+
+router.route('/menus/:id')
+  .put(menusCtrl.updateMenus)
+  .delete(menusCtrl.delMenus);
 
 module.exports = router;

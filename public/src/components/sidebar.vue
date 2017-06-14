@@ -14,6 +14,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#/adminUsers">系统用户管理</a></li>
+            <li><a href="#/menus">目录管理</a></li>
           </ul>
         </li>
 
