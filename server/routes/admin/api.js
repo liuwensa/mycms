@@ -10,9 +10,16 @@ const userCtr      = require('../../controllers/adminUser');
 const categoryCtrl = require('../../controllers/category');
 const contentCtrl  = require('../../controllers/content');
 const tagsCtrl     = require('../../controllers/tags');
-const menusCtrl     = require('../../controllers/menus');
+const menusCtrl    = require('../../controllers/menus');
+const ratelimt     = require('../../tools/ratelimt');
 
 const router = express.Router();
+
+router.route('/test')
+  .all(ratelimt.limitEndpoint)
+  .get(function (req, res) {
+    return res.json({code: 0});
+  });
 
 router.route('/users')
   .get(userCtr.getAdminUsers)
