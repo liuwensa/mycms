@@ -9,7 +9,7 @@ const RateLimit         = ratelimit.RateLimit;
 
 const client = new redis(config.redis);
 
-const limiter = new RateLimit(client, [{interval: 1, limit: 2}]);
+const limiter = new RateLimit(client, [{interval: 60, limit: 2}]);
 
 const limitMiddleware = new ExpressMiddleware(limiter, {
   // defaults to false
@@ -31,27 +31,21 @@ function limitEndpoint(req, res, next) {
   });
 }
 
-// function getIdentifiers(req) {
-//   // return req.query.uid;
-//   return req.ips;
-// }
-//
-// function weight(req) {
-//   return Math.round(Math.random() * 100);
-// }
-//
-// const options = {
-//   getIdentifiers: getIdentifiers,
-//   weight        : weight
-// };
-//
-//
-// const limitEndpoint = limitMiddleware.middleware(options, function(req, res, next) {
-//   // console.log(req, '==========\n', res)
-//   // console.log(req.ips)
-//   res.status(429).json({message: 'rate limit exceeded'});
-// });
+function getIdentifiers(req) {
+  return req.query.uid;
+  // return req.ips;
+}
+
+
+const options = {
+  getIdentifiers
+};
+
+const expressLimitEndpoint = limitMiddleware.middleware(options, function(req, res, next) {
+  res.status(429).json({message: 'rate limit exceeded'});
+});
 
 module.exports = {
-  limitEndpoint
+  limitEndpoint,
+  expressLimitEndpoint
 };

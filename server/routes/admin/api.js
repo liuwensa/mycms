@@ -16,7 +16,7 @@ const ratelimt     = require('../../tools/ratelimt');
 const router = express.Router();
 
 router.route('/test')
-  .all(ratelimt.limitEndpoint)
+  .all(ratelimt.expressLimitEndpoint)
   .get(function (req, res) {
     return res.json({code: 0});
   });
