@@ -7,7 +7,7 @@ const ratelimit = require('ratelimit.js');
 const ExpressMiddleware = ratelimit.ExpressMiddleware;
 const RateLimit         = ratelimit.RateLimit;
 
-const client = new redis;
+const client = new redis(config.redis);
 
 const limiter = new RateLimit(client, [{interval: 1, limit: 2}]);
 
