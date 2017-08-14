@@ -22,10 +22,10 @@ module.exports = {
     password: ''
   },
   redis         : {
-    host: '127.0.0.1',
-    port: 6379,
-    psd : '',
-    db  : 0
+    host    : '127.0.0.1',
+    port    : 6379,
+    password: '',
+    db      : 0
   },
   log           : {
     nolog         : /\.(js|css|png|jpeg|ico|gif|svg)$/,
@@ -35,5 +35,5 @@ module.exports = {
     needConsole   : true,
     replaceConsole: true
   },
-  imageUrl: 'http://127.0.0.1:20008'
+  imageUrl      : 'http://127.0.0.1:20008'
 };
